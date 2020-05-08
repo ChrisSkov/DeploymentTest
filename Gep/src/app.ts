@@ -15,27 +15,12 @@ app.use("/", (req, res, next) => {
   next();
 });
 app.use(express.json());
-//let userAPIRouter = require('./routes/userApi');
-let userAPIRouter = require("./routes/userApiDB");
-let gameAPIRouter = require("./routes/gameAPI");
-let graphqlAPIRouter = require("./routes/graphqlAPI");
 
-app.use("/api/users", userAPIRouter);
-app.use("/gameapi", gameAPIRouter);
-app.use("/graphql", graphqlAPIRouter);
 
 app.get("/api/dummy", (req, res) => {
   res.json({ msg: "Hello" });
 });
 
-app.use(function (req, res, next) {
-  if (req.originalUrl.startsWith("/api")) {
-    res
-      .status(404)
-      .json({ code: 404, msg: "this API does not contanin this endpoint" });
-  }
-  next();
-});
 
 app.use(function (err: any, req: any, res: any, next: Function) {
   //if(err.name === "ApiError"){
